@@ -4,6 +4,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(libisocline C CXX ASM)
 
+include("GNUInstallDirs")
+
 set(CMAKE_C_STANDARD   99)
 set(CMAKE_CXX_STANDARD 11)
 
@@ -163,3 +165,10 @@ if (IC_BUILD_TESTS)
   target_include_directories(test_colors PRIVATE include)
   target_link_libraries(test_colors PRIVATE isocline)
 endif()
+
+install(FILES include/isocline.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+install(TARGETS isocline
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
